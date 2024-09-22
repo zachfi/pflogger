@@ -20,12 +20,11 @@ func main() {
 	}
 	defer handle.Close()
 
-	if err := handle.SetBPFFilter("port 3030"); err != nil {
-		panic(err)
-	}
+	// if err := handle.SetBPFFilter("port 3030"); err != nil {
+	// 	panic(err)
+	// }
 
-	packets := gopacket.NewPacketSource(
-		handle, handle.LinkType()).Packets()
+	packets := gopacket.NewPacketSource(handle, handle.LinkType()).Packets()
 	for pkt := range packets {
 		spew.Dump(pkt)
 	}
