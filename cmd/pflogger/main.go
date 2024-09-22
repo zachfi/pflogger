@@ -9,7 +9,8 @@ import (
 
 const (
 	// The same default as tcpdump.
-	defaultSnapLen = 262144
+	// defaultSnapLen = 262144
+	defaultSnapLen = 0
 )
 
 func main() {
