@@ -6,6 +6,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/google/gopacket"
+	"github.com/google/gopacket/layers"
 	_ "github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
 )
@@ -36,10 +37,11 @@ func main() {
 	}
 
 	log.Info("capturing packets")
-	spew.Dump(handle)
-	spew.Dump(handle.LinkType())
-	packets := gopacket.NewPacketSource(handle, handle.LinkType()).Packets()
-	for pkt := range packets {
-		spew.Dump(pkt)
+	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
+	log.Info("looping packets")
+	for packet := range packetSource.Packets() {
+		pl := packet.Layer(layers.LayerTypePFLog)
+		pflogPacket := pl.(*layers.PFLog)
+		spew.Dump(pflogPacket)
 	}
 }
