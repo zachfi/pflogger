@@ -4,7 +4,6 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	_ "github.com/google/gopacket/layers"
@@ -41,7 +40,23 @@ func main() {
 	log.Info("looping packets")
 	for packet := range packetSource.Packets() {
 		pl := packet.Layer(layers.LayerTypePFLog)
-		pflogPacket := pl.(*layers.PFLog)
-		spew.Dump(pflogPacket)
+		p := pl.(*layers.PFLog)
+
+		log.Info("event",
+			"length", p.Length,
+			"family", p.Family,
+			"action", p.Action,
+			"reason", p.Reason,
+			"ifName", p.IFName,
+			"ruleset", p.Ruleset,
+			"rulenum", p.RuleNum,
+			"subRuleNum", p.SubruleNum,
+			"uid", p.UID,
+			"pid", p.PID,
+			"ruleUID", p.RuleUID,
+			"rulePID", p.RulePID,
+			"direction", p.Direction,
+		)
+
 	}
 }
