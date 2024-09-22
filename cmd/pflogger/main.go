@@ -42,12 +42,12 @@ func main() {
 		pl := packet.Layer(layers.LayerTypePFLog)
 		p := pl.(*layers.PFLog)
 
-		log.Info("event",
+		log.Info(inf,
 			"length", p.Length,
 			"family", p.Family,
 			"action", p.Action,
 			"reason", p.Reason,
-			"ifName", p.IFName,
+			"ifName", string(p.IFName),
 			"ruleset", p.Ruleset,
 			"rulenum", p.RuleNum,
 			"subRuleNum", p.SubruleNum,
