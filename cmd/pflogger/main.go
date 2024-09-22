@@ -56,8 +56,8 @@ func main() {
 			"ruleUID", p.RuleUID,
 			"rulePID", p.RulePID,
 			"direction", p.Direction,
-			"contents", p.Contents,
-			"payload", p.Payload,
+			"contents", string(p.Contents),
+			"payload", string(p.Payload),
 		)
 
 	}
