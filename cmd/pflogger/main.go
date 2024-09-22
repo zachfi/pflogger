@@ -48,7 +48,7 @@ func main() {
 			"action", p.Action,
 			"reason", p.Reason,
 			"ifName", string(p.IFName),
-			"ruleset", p.Ruleset,
+			"ruleset", string(p.Ruleset),
 			"rulenum", p.RuleNum,
 			"subRuleNum", p.SubruleNum,
 			"uid", p.UID,
@@ -56,6 +56,8 @@ func main() {
 			"ruleUID", p.RuleUID,
 			"rulePID", p.RulePID,
 			"direction", p.Direction,
+			"contents", p.Contents,
+			"payload", p.Payload,
 		)
 
 	}
