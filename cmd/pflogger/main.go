@@ -18,8 +18,8 @@ const (
 )
 
 func main() {
-	handler := slog.NewTextHandler(os.Stdout, nil)
-	log := slog.New(handler)
+	lh := slog.NewTextHandler(os.Stdout, nil)
+	log := slog.New(lh)
 
 	log.Info("capturing", "interface", inf)
 	handle, err := pcap.OpenLive("pflog0", defaultSnapLen, true, pcap.BlockForever)
@@ -35,6 +35,9 @@ func main() {
 		return
 	}
 
+	log.Info("capturing packets")
+	spew.Dump(handle)
+	spew.Dump(handle.LinkType())
 	packets := gopacket.NewPacketSource(handle, handle.LinkType()).Packets()
 	for pkt := range packets {
 		spew.Dump(pkt)
